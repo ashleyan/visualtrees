@@ -11,7 +11,7 @@ var simple_chart_config = {
 				text: { name: "First child" }
 			},
 			{
-				text: { name: "Second child" }
+				text: { name: "Third child" }
 			}
 		]
 	}
@@ -37,7 +37,12 @@ var second_child = {
 	text: { name: "Second child" }
 };
 
+var third_child = {
+	parent: parent_node,
+	text: { name: "Third child" }
+};
+
 var simple_chart_config = [
 	config, parent_node,
-		first_child, second_child 
+		first_child, second_child, third_child
 ];
