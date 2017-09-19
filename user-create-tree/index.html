@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    
+	<h3>Enter Text: </h3>
+
+	<input type="text" id="myText" value="">
+
+	<button onclick="myFunction()">Enter</button>
+
+	<p id="demo"></p>
+
+	<script>
+	function myFunction() {
+	    var x = document.getElementById("myText").value;
+        new Treant( mFunction(x) );
+	}
+	</script>
+
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title> Visual Tree </title>
+    <link rel="stylesheet" href="../treant-js-master/Treant.css">
+    <link rel="stylesheet" href="test.css">
+    
+</head>
+<body>
+    <div class="chart" id="basic-example"></div>
+    <script src="../treant-js-master/vendor/raphael.js"></script>
+    <script src="../treant-js-master/Treant.js"></script>
+    
+    <script src="test.js"></script>
+    <script>
+        new Treant( mFunction("[  ]") ); // create placeholder for word that will be inputed by user
+    </script>
+</body>
+</html>
+
