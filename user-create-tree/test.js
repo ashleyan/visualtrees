@@ -10,7 +10,7 @@ function mFunction(x) {
                 HTMLclass: 'nodeExample1'
             }
         },
-        nodeStructure: {
+        nodeStructure: { // plug in createTree function here
             text: {
                 name: "Mark Hill",
                 title: "Chief executive officer",
@@ -90,3 +90,5 @@ function mFunction(x) {
 
     return chart_config;
 }
+
+
