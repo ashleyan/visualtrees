@@ -1,16 +1,4 @@
-// call on each part of array
-// parse string once for each node
-
-// function calls parsing string method within it
-// call recursively
-// x = "(())"   ()(()()) 
-// f(x)
-// then call f(x) again on each array element
-// base case = f("")
-
-// helpful: [a, b, c].map(f) = [f(a), f(b), f(c)]
-// when finished, plug into test.js
-///////////////////////////////////////////////////////////////////////////////
+// contains parse(x) method and createTree(x) method
 
 // x can only be a single parent
 // ex: "()" is allowed (one parent) 
@@ -71,47 +59,54 @@ function parse(x) {
 
 }
 
-console.log(parse(process.argv[2])); // test on command line
+// console.log(parse(process.argv[2])); // test on command line
 
-/*
+
+
+
+
+
+
+
+
+// helpful: [a, b, c].map(f) = [f(a), f(b), f(c)]
+// when finished, plug into test.js
+
+// createTree(x)
+// 1. take in x (which is a string)
+// 2. call parse(x) on x
+// 3. draw node
+// 4. return no child if the array that contains the children for the parent is empty
+// [below is the recursive portion of function]
+// 1. call createTree(x) on every the child in the list
+// 2. keep repeating until full tree is created (a.k.a. #3 is reached which is when the function returns no child)
 function createTree(x) {
 
-	node = parse(x);
+	var array = parse(x);
 
+    // 3. draw node
+    // [below is the recursive portion of function]
+    // 1. call createTree(x) on every the child in the list
+    // 2. keep repeating until full tree is created (a.k.a. #3 is reached which is when the function returns no child)
 
-	if (node == "") {
-		return	{
-			            text: {
-			                ""
-			            },
-			            children: [
-			                {
-			                    text:{
-			                        ""
-			                    },
-			                    stackChildren: true,
-			                },
-			            ]
-				}
-	}
-
-	if (node == "()") {
-		return 	{
-			            text: {
-			                "()"
-			            },
-			            children: [
-			                {
-			                    text:{
-			                        "()"
-			                    },
-			                    stackChildren: true,
-			                },
-			            ]
-				}
-	}
-
-	return createTree(node);
-
+    for(var i = 0; i < array.length; i++) {
+        if (array[0] == "") {
+            return "node!"/*{
+                            text: {
+                                "hi"
+                            },
+                            children: [
+                                {
+                                    text:{
+                                        "hi"
+                                    },
+                                    stackChildren: true,
+                                },
+                            ]
+                    }*/
+        }
+    }
+    return array.map(createTree);
 }
-*/
+
+console.log(createTree(process.argv[2])); // test on command line
