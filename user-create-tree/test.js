@@ -59,8 +59,6 @@ function parse(x) {
 
 }
 
-console.log(parse(process.argv[2])); // test on command line
-
 
 
 
