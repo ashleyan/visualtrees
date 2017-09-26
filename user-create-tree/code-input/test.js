@@ -86,24 +86,16 @@ function createTree(x) {
                 }
     }
     else {
-        var x = array.map(createTree);
+        var y = array.map(createTree);
         return {
             text: {
                 name: ""
             },
-            children: x
+            children: y
         }
     }
 
 }
-
-console.log(createTree(process.argv[2]));
-
-
-
-
-
-
 
 function mFunction(x) {
     var structure = x;
@@ -118,83 +110,8 @@ function mFunction(x) {
                 HTMLclass: 'nodeExample1'
             }
         },
-        nodeStructure:  // plug in createTree function here
+        nodeStructure:
             createTree(structure),
-            /*text: {
-                name: "Mark Hill",
-                title: "Chief executive officer",
-                contact: "Tel: 01 213 123 134",
-            },
-            children: [
-                {
-                    text:{
-                        name: x, // this should change depending on user input
-                        title: "Chief Technology Officer",
-                    },
-                    stackChildren: true,
-                    children: [
-                        {
-                            text:{
-                                name: "Ron Blomquist",
-                                title: "Chief Information Security Officer"
-                            },
-                        },
-                        {
-                            text:{
-                                name: "Michael Rubin",
-                                title: "Chief Innovation Officer",
-                                contact: "we@aregreat.com"
-                            },
-                        }
-                    ]
-                },
-                {
-                    stackChildren: true,
-                    text:{
-                        name: "Linda May",
-                        title: "Chief Business Officer",
-                    },
-                    children: [
-                        {
-                            text:{
-                                name: "Alice Lopez",
-                                title: "Chief Communications Officer"
-                            },
-                        },
-                        {
-                            text:{
-                                name: "Mary Johnson",
-                                title: "Chief Brand Officer"
-                            },
-                        },
-                        {
-                            text:{
-                                name: "Kirk Douglas",
-                                title: "Chief Business Development Officer"
-                            },
-                        }
-                    ]
-                },
-                {
-                    text:{
-                        name: "John Green",
-                        title: "Chief accounting officer",
-                        contact: "Tel: 01 213 123 134",
-                    },
-                    children: [
-                        {
-                            text:{
-                                name: "Erica Reel",
-                                title: "Chief Customer Officer"
-                            },
-                            link: {
-                                href: "http://www.google.com"
-                            },
-                        }
-                    ]
-                }
-            ]*/
-        
     };
 
     return chart_config;
