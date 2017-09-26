@@ -1,4 +1,4 @@
-// contains parse(x) method and createTree(x) method
+// Tree structure as a function of textual input (parentheses)
 
 // x can only be a single parent
 // ex: "()" is allowed (one parent) 
@@ -58,17 +58,6 @@ function parse(x) {
     return array;
 
 }
-
-
-
-
-
-
-
-
-
-// helpful: [a, b, c].map(f) = [f(a), f(b), f(c)]
-// when finished, plug into test.js
 
 // createTree(x)
 // 1. take in x (which is a string)
