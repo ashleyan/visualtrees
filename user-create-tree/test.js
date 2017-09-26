@@ -91,23 +91,24 @@ function createTree(x) {
     if (array[0] == "") {
         return  {
                         text: {
-                            "hi"
+                            name: ""
                         },
-                        children: [
-                            {
-                                text:{
-                                    "hi"
-                                },
-                                stackChildren: true,
-                            },
-                        ]
+                        children: []
                 }
     }
     else {
-        return array.map(createTree);
+        var x = array.map(createTree);
+        return {
+            text: {
+                name: ""
+            },
+            children: x
+        }
     }
+
 }
 
+console.log(createTree(process.argv[2]));
 
 
 
@@ -116,7 +117,7 @@ function createTree(x) {
 
 
 function mFunction(x) {
-    var structure = "(() ())";
+    var structure = x;
     var chart_config = {
         chart: {
             container: "#basic-example",
@@ -128,8 +129,8 @@ function mFunction(x) {
                 HTMLclass: 'nodeExample1'
             }
         },
-        nodeStructure: { // plug in createTree function here
-            createTree(structure);
+        nodeStructure:  // plug in createTree function here
+            createTree(structure),
             /*text: {
                 name: "Mark Hill",
                 title: "Chief executive officer",
@@ -204,7 +205,7 @@ function mFunction(x) {
                     ]
                 }
             ]*/
-        }
+        
     };
 
     return chart_config;
