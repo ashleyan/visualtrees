@@ -21,10 +21,10 @@ function parse(x) {
     }
     
     if(x.indexOf("(") > -1) {
-        array.push(x.substring(0,j));
+        array.push(x.substring(0,j).trim());
     }
     else {
-        array.push("");
+        array.push(x);
         return array;
     }
     
@@ -58,11 +58,11 @@ function parse(x) {
         index2+=1;
     }
 
-    return array;
+    return array.filter((s) => s != " ");
 
 }
 
-console.log(parse(process.argv[2]));
+// console.log(parse(process.argv[2])); // for testing
 
 // createTree(x)
 // 1. take in x (which is a string)
@@ -76,16 +76,21 @@ function createTree(x) {
 
     var array = []
     array = parse(x);
+    var parentx = array[0];
 
     // 3. draw node
     // [below is the recursive portion of function]
     // 1. call createTree(x) on every the child in the list
     // 2. keep repeating until full tree is created (a.k.a. #3 is reached which is when the function returns no child)
 
-    if (array[0] == "") {
+    array = array.slice(1, array.length);
+    array = array.map((s) => s.slice(1, s.length - 1));
+    console.log(array);
+
+    if (array == []) {
         return  {
                         text: {
-                            name: ""
+                            name: parentx
                         },
                         children: []
                 }
@@ -94,13 +99,15 @@ function createTree(x) {
         var y = array.map(createTree);
         return {
             text: {
-                name: ""
+                name: parentx
             },
             children: y
         }
     }
 
 }
+
+console.log(createTree(process.argv[2])); // for testing
 
 function mFunction(x) {
     var structure = x;
