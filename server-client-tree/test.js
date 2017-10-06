@@ -107,7 +107,7 @@ function createTree(x) {
 
 }
 
-console.log(createTree(process.argv[2])); // for testing
+// console.log(createTree(process.argv[2])); // for testing
 
 function mFunction(x) {
     var structure = x;
