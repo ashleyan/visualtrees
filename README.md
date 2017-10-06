@@ -17,5 +17,5 @@ Research Project at Columbia University under the Computational Biology Departme
   * server sends the result of the command line to client
   * client uses that result to create tree
 
-## Other Important
+## Other Important Information
 * prob-seq: allows for use of ./prob-seq -i _ --stb-output _
