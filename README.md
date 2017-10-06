@@ -11,9 +11,6 @@ Research Project at Columbia University under the Computational Biology Departme
   * code-input: user inputs function call, and the new tree structure created displays the function call, including nested calls (each child is a nested call)
 
 * server-client-tree: user inputs text to a CLI, and the result is displayed as a tree
-  * goal: client can connect to server
+  * client can connect to server and send messages
   * goal: display an interaction with command line interface (CLI)
   * goal: input the text to a CLI, display the result as a tree
-
-## Other Features
-* created local server (http://localhost:8080) for server-client-tree project folder
