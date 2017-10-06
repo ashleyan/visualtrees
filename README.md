@@ -11,6 +11,11 @@ Research Project at Columbia University under the Computational Biology Departme
   * code-input: user inputs function call, and the new tree structure created displays the function call, including nested calls (each child is a nested call)
 
 * server-client-tree: user inputs text to a CLI, and the result is displayed as a tree
-  * client can connect to server and send messages
-  * goal: display an interaction with command line interface (CLI)
-  * goal: input the text to a CLI, display the result as a tree
+  * user writes code in textbox
+  * client send this user's code to server
+  * server uses command line to create nicer format for code that can be used to create trees: ./prob-seq -i _ --stb-output _
+  * server sends the result of the command line to client
+  * client uses that result to create tree
+
+## Other Important
+* prob-seq: allows for use of ./prob-seq -i _ --stb-output _
