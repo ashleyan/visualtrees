@@ -27,3 +27,22 @@ socket.on('connection', function(client){
 });
 
 console.log('Server running at http://127.0.0.1:' + port + '/');
+
+
+
+
+// can make 'cat' and 'hi' represented by variables
+// then use them in the above functions to allow client to use
+const { exec } = require('child_process');
+// anonymous function: doesn't have a name ; only using it once
+var x = exec('cat', (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return;
+    }
+    console.log(`stdout: ${stdout}`);
+    console.log(`stderr: ${stderr}`);
+});
+x.stdin.write('hi');
+x.stdin.end();
+
