@@ -3,8 +3,8 @@
     
     <script src="socket.io-client-master/dist/socket.io.js"></script>
     <script>
-        // Create SocketIO instance, connect
 
+        // Create SocketIO instance, connect
         var socket = io('http://localhost:1234');
 
         // Add a connect listener
@@ -14,18 +14,13 @@
         // Add a connect listener
         socket.on('message',function(data) {
           console.log('Received a message from the server!',data);
+          new Treant( mFunction(data) );
+          // test: series [(state "safsgfd"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]
         });
         // Add a disconnect listener
         socket.on('disconnect',function() {
           console.log('The client has disconnected!');
         });
-
-        // Sends a message to the server via sockets
-        function sendMessageToServer(message) {
-          socket.emit('message', message);
-        };
-
-        sendMessageToServer("hi");
 
     </script>
 
@@ -40,7 +35,8 @@
 	<script>
 	function myFunction() {
 	    var x = document.getElementById("myText").value;
-        new Treant( mFunction(x) );
+        // send message to server via sockets
+        socket.emit('message', x);
 	}
 	</script>
 
