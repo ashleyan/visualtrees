@@ -13,9 +13,13 @@ Research Project at Columbia University under the Computational Biology Departme
 * server-client-tree: user inputs text to a CLI, and the result is displayed as a tree
   * user writes code in textbox
   * client send this user's code to server
-  * server uses command line to create nicer format for code that can be used to create trees: ./prob-seq -i _ --stb-output _
+  * server uses command line to create nicer format for code that can be used to create trees: ../prob-seq -i _ --stb-output _
   * server sends the result of the command line to client
   * client uses that result to create tree
 
-## Other Important Information
-* prob-seq: allows for use of ../prob-seq -i _ --stb-output _
+## Pending Changes
+* Bigger+Better text box for input
+* Make tree viewport bigger/dynamic
+* Send errors back to client to display
+* Have option on webpage to "sample"
+  * Use command: "prob-seq -i _ --sample [n]", where n is the number of samples
