@@ -18,4 +18,4 @@ Research Project at Columbia University under the Computational Biology Departme
   * client uses that result to create tree
 
 ## Other Important Information
-* prob-seq: allows for use of ./prob-seq -i _ --stb-output _
+* prob-seq: allows for use of ../prob-seq -i _ --stb-output _
