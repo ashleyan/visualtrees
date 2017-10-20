@@ -27,6 +27,7 @@ socket.on('connection', function(client){
         var x = exec(command, (error, stdout, stderr) => {
             if (error) {
               console.error(`exec error: ${error}`);
+              socket.emit('error', stderr);
               return;
             }
             console.log(`stdout: ${stdout}`);
@@ -36,7 +37,25 @@ socket.on('connection', function(client){
         });
         x.stdin.write(event);
         x.stdin.end();
+    });
 
+    client.on('samples',function(event){
+      console.log('Received message from client!', event);
+        
+        var command = "../prob-seq -i _ --sample 5";
+        var x = exec(command, (error, stdout, stderr) => {
+            if (error) {
+              console.error(`exec error: ${error}`);
+              socket.emit('error', stderr);
+              return;
+            }
+            console.log(`stdout: ${stdout}`);
+            // send message to client
+            socket.emit('samples', stdout);
+            console.log(`stderr: ${stderr}`);
+        });
+        x.stdin.write(event);
+        x.stdin.end();
     });
 
     client.on('disconnect',function(){
