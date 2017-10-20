@@ -18,8 +18,6 @@ Research Project at Columbia University under the Computational Biology Departme
   * client uses that result to create tree
 
 ## Pending Changes
-* Bigger+Better text box for input
-* Make tree viewport bigger/dynamic
-* Send errors back to client to display
-* Have option on webpage to "sample"
-  * Use command: "prob-seq -i _ --sample [n]", where n is the number of samples
+* Make tree viewport dynamic
+* Labeling different nodes based on which function
+* Lighting up paths
