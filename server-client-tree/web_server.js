@@ -21,7 +21,7 @@ socket.on('connection', function(client){
 
     // Success!  Now listen to messages to be received
     client.on('message',function(event){ 
-        console.log('Received message from client!',event);
+        console.log('Received message from client!', event);
         
         var command = "../prob-seq -i _ --stb-output _";
         var x = exec(command, (error, stdout, stderr) => {

@@ -13,7 +13,7 @@
         });
         // Add a connect listener
         socket.on('message',function(data) {
-          console.log('Received a message from the server!',data);
+          console.log('Received a message from the server!', data);
           new Treant( mFunction(data) );
           // test: series [(state "safsgfd"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]
         });
@@ -25,10 +25,12 @@
     </script>
 
 	<h3>Enter Text: </h3>
-
-	<input type="text" id="myText" value="">
-
-	<button onclick="myFunction()">Enter</button>
+    <div class="CommentBox">
+        <div>
+            <TEXTAREA Name="text" id="myText" ROWS=10 COLS=100></TEXTAREA>
+            <button onclick="myFunction()">Enter</button>
+        </div>
+    </div>
 
 	<p id="demo"></p>
 
