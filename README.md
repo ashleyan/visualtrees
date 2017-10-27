@@ -18,6 +18,7 @@ Research Project at Columbia University under the Computational Biology Departme
   * client uses that result to create tree
 
 ## Pending Changes
+* Highlighting paths (tree traversal function that takes in array of integers specifying the path, 
+and then changes the colors of those nodes)
 * Make tree viewport dynamic
 * Labeling different nodes based on which function
-* Lighting up paths
