@@ -89,6 +89,7 @@ function createTree(x) {
 
     if (array == []) {
         return  {
+                        HTMLclass: 'test',
                         text: {
                             name: parentx
                         },
@@ -98,6 +99,7 @@ function createTree(x) {
     else {
         var y = array.map(createTree);
         return {
+            HTMLclass: 'test',
             text: {
                 name: parentx
             },
@@ -106,6 +108,19 @@ function createTree(x) {
     }
 
 }
+
+
+
+
+
+/* tree traversal function that takes in array of integers specifying the path, 
+and then changes the colors of those nodes */
+
+
+
+
+
+
 
 // console.log(createTree(process.argv[2])); // for testing
 
@@ -117,9 +132,6 @@ function mFunction(x) {
             
             connectors: {
                 type: 'step'
-            },
-            node: {
-                HTMLclass: 'nodeExample1'
             }
         },
         nodeStructure:
@@ -128,5 +140,3 @@ function mFunction(x) {
 
     return chart_config;
 }
-
-

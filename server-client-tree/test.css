@@ -27,6 +27,18 @@ body { background: #fff; }
     font-size: 12px;
 }
 
+.test {
+    padding: 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #41f1f4;
+    border: 1px solid #000;
+    width: 200px;
+    font-family: Tahoma;
+    font-size: 12px;
+}
+
 .nodeExample1 img {
     margin-right:  10px;
 }
