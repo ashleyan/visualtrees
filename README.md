@@ -3,7 +3,7 @@
 Research Project at Columbia University under the Computational Biology Department. Focus is on creating trees that visually represent code.
 
 ## Project Folder Descriptions
-* highlight-tree
+* highlight-tree: specific paths in tree can be highlighted
   * cleaned up code
   * highlight path in tree
   
