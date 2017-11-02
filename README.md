@@ -3,13 +3,10 @@
 Research Project at Columbia University under the Computational Biology Department. Focus is on creating trees that visually represent code.
 
 ## Project Folder Descriptions
-* user-update-tree: user inputs data, and that data gets added to tree once button is pushed
-  * user inputs text, and a specific node's text will be replaced with that text
-
-* user-create-tree: user inputs data, and that data determines how the new tree will look
-  * textual-input: user inputs structure represented by parentheses, and that inputs determines the new tree structure
-  * code-input: user inputs function call, and the new tree structure created displays the function call, including nested calls (each child is a nested call)
-
+* highlight-tree
+  * cleaned up code
+  * highlight path in tree
+  
 * server-client-tree: user inputs text to a CLI, and the result is displayed as a tree
   * user writes code in textbox
   * client send this user's code to server
@@ -17,8 +14,14 @@ Research Project at Columbia University under the Computational Biology Departme
   * server sends the result of the command line to client
   * client uses that result to create tree
 
+* user-create-tree: user inputs data, and that data determines how the new tree will look
+  * textual-input: user inputs structure represented by parentheses, and that inputs determines the new tree structure
+  * code-input: user inputs function call, and the new tree structure created displays the function call, including nested calls (each child is a nested call)
+  
+* user-update-tree: user inputs data, and that data gets added to tree once button is pushed
+  * user inputs text, and a specific node's text will be replaced with that text
+  
 ## Pending Changes
-* Highlighting paths (tree traversal function that takes in array of integers specifying the path, 
-and then changes the colors of those nodes)
+* Highlight a single path that user choses from a list of paths
 * Make tree viewport dynamic
 * Labeling different nodes based on which function
