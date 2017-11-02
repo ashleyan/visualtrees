@@ -57,6 +57,25 @@ socket.on('connection', function(client){
         x.stdin.end();
     });
 
+    // Receive code from client to highlight path in tree
+    client.on('path',function(event){ 
+        console.log('Received message from client!', event);
+        
+        var command = "../prob-seq -i _ --stb-output _";
+        var x = exec(command, (error, stdout, stderr) => {
+            if (error) {
+              console.error(`exec error: ${error}`);
+              socket.emit('error', stderr);
+              return;
+            }
+            console.log(`stdout: ${stdout}`);
+            socket.emit('path', stdout);
+            console.log(`stderr: ${stderr}`);
+        });
+        x.stdin.write(event);
+        x.stdin.end();
+    });
+
     // Disconnect
     client.on('disconnect',function(){
         clearInterval(interval);

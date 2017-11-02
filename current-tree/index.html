@@ -12,22 +12,30 @@
             console.log('Client has connected to the server!');
             displayError("");
         });
-        // Receive created tree from server
+        // Receive created tree from server, then display tree
         socket.on('tree',function(data) {
             console.log('Received a message from the server!', data);
             displayError("");
             new Treant( displayTree(data) );
             // test: series [(state "safsgfd"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]
         });
+        // Receive error messages from server, then display error messages
         socket.on('error',function(data) {
             console.log('Received an error message from the server!', data);
             displayError(data);
         });  
-        // Receive sampling outputs from server
+        // Receive sampling outputs from server, then display samples
         socket.on('samples',function(data) {
             console.log('Received a sampling message from the server!', data);
             displaySamples(data);
         }); 
+        // Receive created tree from server, then highlight path
+        socket.on('path',function(data) {
+            console.log('Received a message from the server!', data);
+            displayError("");
+            new Treant( highlightPath(data) );
+            // test: series [(state "safsgfd"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]
+        });
         // Disconnected
         socket.on('disconnect',function() {
             console.log('The client has disconnected!');
@@ -62,8 +70,8 @@
     <h3>Highlight Paths: </h3>
         <div class="TextBox">
             <div>
-                <TEXTAREA Name="text" id="paths" ROWS=5 COLS=90 readonly></TEXTAREA>
-                <button onclick="highlightPaths()">Enter</button>
+                <TEXTAREA Name="text" id="path" ROWS=5 COLS=90></TEXTAREA>
+                <button onclick="sendPathCode()">Enter</button>
             </div>
         </div>
 
@@ -89,6 +97,12 @@
         // Receive error messages from server
         function displayError(err) {
             document.getElementById("errors").value = err;
+        }
+
+        // Send code to server to highlight path in tree
+        function sendPathCode() {
+            var x = document.getElementById("path").value;
+            socket.emit('path', x);
         }
 
 	</script>
