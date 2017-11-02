@@ -112,21 +112,22 @@ function createTree(x) {
 
 /* tree traversal function that takes in array of integers specifying the path, 
 and then changes the colors of those nodes */
-function changeColor(x, arr) {
+function changePathColor(x, arr) {
+
     if(arr.length == 0) {
         x.HTMLclass = 'nodeExample1';
     }
     else{
         x.HTMLclass = 'nodeExample1';
-        changeColor(x.children[arr[0]], arr.slice(1));
+        changePathColor(x.children[arr[0]], arr.slice(1));
     }
+
     return x;
+
 }
 
+function displayTree(x) {
 
-// console.log(createTree(process.argv[2])); // for testing
-
-function mFunction(x) {
     var structure = x;
     var chart_config = {
         chart: {
@@ -137,8 +138,7 @@ function mFunction(x) {
             }
         },
         nodeStructure:
-            //createTree(structure),
-            changeColor(createTree(structure), [2,1,0]),
+            changePathColor( createTree(structure), [2,1,0] ),
     };
 
     return chart_config;

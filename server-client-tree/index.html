@@ -7,30 +7,31 @@
         // Create SocketIO instance, connect
         var socket = io('http://localhost:1234');
 
-        // Add a connect listener
+        // Connect
         socket.on('connect',function() {
-          console.log('Client has connected to the server!');
-          displayError("");
+            console.log('Client has connected to the server!');
+            displayError("");
         });
-        // Add a connect listener
+        // Receive created tree from server
         socket.on('message',function(data) {
-          console.log('Received a message from the server!', data);
-          displayError("");
-          new Treant( mFunction(data) );
-          // test: series [(state "safsgfd"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]
+            console.log('Received a message from the server!', data);
+            displayError("");
+            new Treant( mFunction(data) );
+            // test: series [(state "safsgfd"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]
         });
         socket.on('error',function(data) {
-          console.log('Received an error message from the server!', data);
-          displayError(data);
+            console.log('Received an error message from the server!', data);
+            displayError(data);
         });  
+        // Receive sampling outputs from server
         socket.on('samples',function(data) {
-          console.log('Received a sampling message from the server!', data);
-          displaySamples(data);
+            console.log('Received a sampling message from the server!', data);
+            displaySamples(data);
         }); 
-        // Add a disconnect listener
+        // Disconnect
         socket.on('disconnect',function() {
-          console.log('The client has disconnected!');
-          displayError("Not connected to server");
+            console.log('The client has disconnected!');
+            displayError("Not connected to server");
         });
 
     </script>
@@ -38,7 +39,7 @@
 	<h3>Enter Text: </h3>
     <div class="CommentBox">
         <div>
-            <TEXTAREA Name="text" id="myText" ROWS=10 COLS=100></TEXTAREA>
+            <TEXTAREA Name="text" id="myText" ROWS=5 COLS=90></TEXTAREA>
             <button onclick="myFunction()">Enter</button>
             <button onclick="sendSamples()">Sample</button>
         </div>
@@ -47,36 +48,45 @@
     <h3>Sampling Results: </h3>
     <div class="CommentBox">
         <div>
-            <TEXTAREA Name="text" id="sampleResults" ROWS=10 COLS=100 readonly></TEXTAREA>
+            <TEXTAREA Name="text" id="sampleResults" ROWS=5 COLS=90 readonly></TEXTAREA>
         </div>
     </div>
 
     <h3>Error Messages: </h3>
     <div class="CommentBox">
         <div>
-            <TEXTAREA Name="text" id="errors" ROWS=10 COLS=100 readonly>Not connected to server</TEXTAREA>
+            <TEXTAREA Name="text" id="errors" ROWS=5 COLS=90 readonly>Not connected to server</TEXTAREA>
+        </div>
+    </div>
+
+    <h3>Highlight Paths: </h3>
+    <div class="CommentBox">
+        <div>
+            <TEXTAREA Name="text" id="errors" ROWS=5 COLS=90 readonly></TEXTAREA>
         </div>
     </div>
 
 	<p id="demo"></p>
 
 	<script>
-	function myFunction() {
-	    var x = document.getElementById("myText").value;
-        // send message to server via sockets
-        socket.emit('message', x);
-	}
-    function displayError(err) {
-        document.getElementById("errors").value = err;
-    }
-    function sendSamples() {
-        var x = document.getElementById("myText").value;
-        // send message to server via sockets
-        socket.emit('samples', x);
-    }
-    function displaySamples(samp) {
-        document.getElementById("sampleResults").value = samp;
-    }
+
+    	function myFunction() {
+    	    var x = document.getElementById("myText").value;
+            // send code to create tree to server via sockets
+            socket.emit('message', x);
+    	}
+        function displayError(err) {
+            document.getElementById("errors").value = err;
+        }
+        function sendSamples() {
+            var x = document.getElementById("myText").value;
+            // send code to do sampling to server via sockets
+            socket.emit('samples', x);
+        }
+        function displaySamples(samp) {
+            document.getElementById("sampleResults").value = samp;
+        }
+
 	</script>
 
     <head>
@@ -95,7 +105,7 @@
     
     <script src="test.js"></script>
     <script>
-        new Treant( mFunction("series (state \"A\") (reverseSequence (state \"B\")) (then (state \"C\") (reverseSequence (state \"D\")))") );
+        new Treant( displayTree("series (state \"A\") (reverseSequence (state \"B\")) (then (state \"C\") (reverseSequence (state \"D\")))") );
     </script>
 </body>
 </html>

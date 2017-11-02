@@ -2,24 +2,24 @@
 var http = require('http');
 var io = require('socket.io');
 var port = 1234;
-//var z; //************ CHECK ****************//
 
 // Start the server at port 1234
 var server = http.createServer();
 
+// Wait for a connection
 server.listen(port);
 
 // Create a Socket.IO instance, passing it our server
 var socket = io.listen(server);
 
-// exec function
+// To allow for use of command line
 const { exec } = require('child_process');
 
 // Add a connect listener
 socket.on('connection', function(client){ 
     console.log('Connection to client established');
 
-    // Success!  Now listen to messages to be received
+    // Receive code from client to create tree
     client.on('message',function(event){ 
         console.log('Received message from client!', event);
         
@@ -31,7 +31,6 @@ socket.on('connection', function(client){
               return;
             }
             console.log(`stdout: ${stdout}`);
-            // send message to client
             socket.emit('message', stdout);
             console.log(`stderr: ${stderr}`);
         });
@@ -39,6 +38,7 @@ socket.on('connection', function(client){
         x.stdin.end();
     });
 
+    // Receive code from client to do sampling
     client.on('samples',function(event){
       console.log('Received message from client!', event);
         
@@ -50,7 +50,6 @@ socket.on('connection', function(client){
               return;
             }
             console.log(`stdout: ${stdout}`);
-            // send message to client
             socket.emit('samples', stdout);
             console.log(`stderr: ${stderr}`);
         });
@@ -58,6 +57,7 @@ socket.on('connection', function(client){
         x.stdin.end();
     });
 
+    // Disconnect
     client.on('disconnect',function(){
         clearInterval(interval);
         console.log('Server has disconnected');
