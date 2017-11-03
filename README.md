@@ -5,7 +5,7 @@ Research Project at Columbia University under the Computational Biology Departme
 ## Project Folder Descriptions
 * highlight-tree: specific paths in tree can be highlighted
   * cleaned up code
-  * highlight path in tree
+  * user can form a list of paths, and then highlight one of those paths
   
 * server-client-tree: user inputs text to a CLI, and the result is displayed as a tree
   * user writes code in textbox
@@ -21,7 +21,7 @@ Research Project at Columbia University under the Computational Biology Departme
 * user-update-tree: user inputs data, and that data gets added to tree once button is pushed
   * user inputs text, and a specific node's text will be replaced with that text
   
-## Pending Changes
-* Highlight a single path that user choses from a list of paths
+## Potential Changes
+* Highlighting paths in gradients
 * Make tree viewport dynamic
 * Labeling different nodes based on which function
