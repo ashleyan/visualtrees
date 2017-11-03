@@ -78,7 +78,6 @@ socket.on('connection', function(client){
 
     // Disconnect
     client.on('disconnect',function(){
-        clearInterval(interval);
         console.log('Server has disconnected');
     });
 });

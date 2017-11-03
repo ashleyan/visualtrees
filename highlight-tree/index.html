@@ -6,6 +6,7 @@
 
         // Create SocketIO instance, connect
         var socket = io('http://localhost:1234');
+        var tree_display;
 
         // Connected
         socket.on('connect',function() {
@@ -16,7 +17,8 @@
         socket.on('tree',function(data) {
             console.log('Received a message from the server!', data);
             displayError("");
-            new Treant( displayTree(data) );
+            tree_display = displayTree(data)
+            new Treant( tree_display );
             // test: series [(state "safsgfd"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]
         });
         // Receive error messages from server, then display error messages
@@ -30,12 +32,12 @@
             displaySamples(data);
         }); 
         // Receive created tree from server, then highlight path
-        socket.on('path',function(data) {
+        /*socket.on('path',function(data) {
             console.log('Received a message from the server!', data);
             displayError("");
             new Treant( highlightPath(data) );
             // test: series [(state "safsgfd"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]
-        });
+        });*/
         // Disconnected
         socket.on('disconnect',function() {
             console.log('The client has disconnected!');
@@ -49,7 +51,6 @@
             <div>
                 <TEXTAREA Name="text" id="code" ROWS=5 COLS=90></TEXTAREA>
                 <button onclick="sendCode()">Enter</button>
-                <button onclick="sendSamples()">Sample</button>
             </div>
         </div>
 
@@ -57,6 +58,7 @@
         <div class="TextBox">
             <div>
                 <TEXTAREA Name="text" id="sampleResults" ROWS=5 COLS=90 readonly></TEXTAREA>
+                <button onclick="sendSamples()">Sample</button>
             </div>
         </div>
 
@@ -71,11 +73,37 @@
         <div class="TextBox">
             <div>
                 <TEXTAREA Name="text" id="path" ROWS=5 COLS=90></TEXTAREA>
-                <button onclick="sendPathCode()">Enter</button>
+                <button onclick="highlight()">Enter</button>
             </div>
         </div>
 
+    <div class="container">
+        <input type="button" onclick="decrementValue();highlight()" value="-" />
+        <input type="text" name="quantity" value="0" maxlength="2" max="10" size="1" id="number" />
+        <input type="button" onclick="incrementValue();highlight()" value="+" />
+    </div>
+
 	<script>
+
+        function incrementValue()
+        {
+            var value = parseInt(document.getElementById('number').value, 10);
+            value = isNaN(value) ? 0 : value;
+            if(value<10){
+                value++;
+                    document.getElementById('number').value = value;
+            }
+        }
+        function decrementValue()
+        {
+            var value = parseInt(document.getElementById('number').value, 10);
+            value = isNaN(value) ? 0 : value;
+            if(value>0){
+                value--;
+                    document.getElementById('number').value = value;
+            }
+
+        }
 
         // Send code to server to create tree
     	function sendCode() {
@@ -99,10 +127,17 @@
             document.getElementById("errors").value = err;
         }
 
-        // Send code to server to highlight path in tree
-        function sendPathCode() {
-            var x = document.getElementById("path").value;
-            socket.emit('path', x);
+        // Highlight path in tree
+        function highlight() {
+            // test: 2 1 0
+            var value = parseInt(document.getElementById('number').value, 10);
+            var lines = document.getElementById("path").value.split("\n");
+            var x = lines[value].split(",");
+            for(var i = 0; i < x.length; i++) { 
+                x[i] = parseInt(x[i], 10); 
+            } 
+            var new_tree = highlightPath( tree_display, x );
+            new Treant( new_tree );
         }
 
 	</script>

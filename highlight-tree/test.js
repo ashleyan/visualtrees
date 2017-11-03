@@ -93,6 +93,7 @@ function createTree(x) {
 
 
 // Takes in array of integers specifying the path, then changes the color of those nodes
+// Input is node structure
 function changePathColor(x, arr) {
 
     if(arr.length == 0) {
@@ -127,20 +128,11 @@ function displayTree(x) {
 }
 
 // Highlight path in tree
-function highlightPath(x) {
+// Input should be chart config
+function highlightPath(x, path) {
 
-    var structure = x;
-    var chart_config = {
-        chart: {
-            container: "#basic-example",
-            
-            connectors: {
-                type: 'step'
-            }
-        },
-        nodeStructure:
-            changePathColor( createTree(structure), [2,1,0] ),
-    };
+    var newTree = JSON.parse(JSON.stringify(x));
+    newTree.nodeStructure = changePathColor( newTree.nodeStructure, path );
 
-    return chart_config;
+    return newTree;
 }
