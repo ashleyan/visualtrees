@@ -4,8 +4,8 @@ Research Project at Columbia University under the Computational Biology Departme
 
 ## Project Folder Descriptions
 * highlight-tree: specific paths in tree can be highlighted
-  * cleaned up code
-  * user can form a list of paths, and then highlight one of those paths
+  * user can enter a list of paths, and then choose to highlight one of those paths
+  * increment/decrement buttons allow user to switch between different paths to highlight
   
 * server-client-tree: user inputs text to a CLI, and the result is displayed as a tree
   * user writes code in textbox
