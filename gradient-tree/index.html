@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    
+    <script src="socket.io-client-master/dist/socket.io.js"></script>
+    <script>
+
+        // Create SocketIO instance, connect
+        var socket = io('http://localhost:1234');
+        var tree_display;
+
+        // Connected
+        socket.on('connect',function() {
+            console.log('Client has connected to the server!');
+            displayError("");
+        });
+        // Receive created tree from server, then display tree
+        socket.on('tree',function(data) {
+            console.log('Received a message from the server!', data);
+            displayError("");
+            tree_display = displayTree(data)
+            new Treant( tree_display );
+            // test: series [(state "safsgfd"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]
+        });
+        // Receive error messages from server, then display error messages
+        socket.on('error',function(data) {
+            console.log('Received an error message from the server!', data);
+            displayError(data);
+        });  
+        // Receive sampling outputs from server, then display samples
+        socket.on('samples',function(data) {
+            console.log('Received a sampling message from the server!', data);
+            displaySamples(data);
+        }); 
+        // Receive created tree from server, then highlight path
+        /*socket.on('path',function(data) {
+            console.log('Received a message from the server!', data);
+            displayError("");
+            new Treant( highlightPath(data) );
+            // test: series [(state "safsgfd"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]
+        });*/
+        // Disconnected
+        socket.on('disconnect',function() {
+            console.log('The client has disconnected!');
+            displayError("Not connected to server");
+        });
+
+    </script>
+
+	<h3>Enter Text: </h3>
+        <div class="TextBox">
+            <div>
+                <TEXTAREA Name="text" id="code" ROWS=5 COLS=90>series [(state "safsgfd"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]</TEXTAREA>
+                <button onclick="sendCode()">Enter</button>
+            </div>
+        </div>
+
+    <h3>Sampling Results: </h3>
+        <div class="TextBox">
+            <div>
+                <TEXTAREA Name="text" id="sampleResults" ROWS=5 COLS=90 readonly></TEXTAREA>
+                <button onclick="sendSamples()">Sample</button>
+            </div>
+        </div>
+
+    <h3>Error Messages: </h3>
+        <div class="TextBox">
+            <div>
+                <TEXTAREA Name="text" id="errors" ROWS=5 COLS=90 readonly>Not connected to server</TEXTAREA>
+            </div>
+        </div>
+
+    <h3>Highlight Paths: </h3>
+        <div class="TextBox">
+            <div>
+                <TEXTAREA Name="text" id="path" ROWS=5 COLS=90></TEXTAREA>
+                <button onclick="highlight()">Enter</button>
+            </div>
+        </div>
+
+    <div class="container">
+        <input type="button" onclick="decrementValue();highlight()" value="-" />
+        <input type="text" name="quantity" value="0" maxlength="2" max="10" size="1" id="number" />
+        <input type="button" onclick="incrementValue();highlight()" value="+" />
+    </div>
+
+	<script>
+
+        function incrementValue()
+        {
+            var value = parseInt(document.getElementById('number').value, 10);
+            value = isNaN(value) ? 0 : value;
+            if(value<10){
+                value++;
+                    document.getElementById('number').value = value;
+            }
+        }
+        function decrementValue()
+        {
+            var value = parseInt(document.getElementById('number').value, 10);
+            value = isNaN(value) ? 0 : value;
+            if(value>0){
+                value--;
+                    document.getElementById('number').value = value;
+            }
+
+        }
+
+        // Send code to server to create tree
+    	function sendCode() {
+    	    var x = document.getElementById("code").value;
+            socket.emit('code', x);
+    	}
+
+        // Send code to server to do sampling
+        function sendSamples() {
+            var x = document.getElementById("code").value;
+            socket.emit('samples', x);
+        }
+
+        // Receive samples from server
+        function displaySamples(samp) {
+            document.getElementById("sampleResults").value = samp;
+        }
+
+        // Receive error messages from server
+        function displayError(err) {
+            document.getElementById("errors").value = err;
+        }
+
+        // Highlight path in tree
+        function highlight() {
+            // test: 2 1 0
+            var value = parseInt(document.getElementById('number').value, 10);
+            var lines = document.getElementById("path").value.split("\n");
+            var x = lines[value].split(",");
+            for(var i = 0; i < x.length; i++) { 
+                x[i] = parseInt(x[i], 10); 
+            } 
+            var new_tree = highlightPath( tree_display, x );
+            new Treant( new_tree );
+        }
+
+	</script>
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+        <title> Visual Tree </title>
+        <link rel="stylesheet" href="../treant-js-master/Treant.css">
+        <link rel="stylesheet" href="test.css">
+    
+    </head>
+
+    <body>
+
+        <div class="chart" id="basic-example"></div>
+        <script src="../treant-js-master/vendor/raphael.js"></script>
+        <script src="../treant-js-master/Treant.js"></script>
+        <script src="test.js"></script>
+
+    </body>
+
+</html>

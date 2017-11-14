@@ -1,0 +1,46 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { margin:0; padding:0; }
+table { border-collapse:collapse; border-spacing:0; }
+fieldset,img { border:0; }
+address,caption,cite,code,dfn,em,strong,th,var { font-style:normal; font-weight:normal; }
+caption,th { text-align:left; }
+h1,h2,h3,h4,h5,h6 { font-family: Comic Sans MS; font-size:100%; font-weight:normal; }
+q:before,q:after { content:''; }
+abbr,acronym { border:0; }
+h3, .TextBox, .container { font-family: Comic Sans MS; text-align:left; margin:auto; width:800px;}
+button { font-family: Comic Sans MS; text-align:center; margin:0; width:80px;}
+
+body { background: #fff; }
+.chart { margin: 5px; }
+.Treant > .node {  }
+.Treant > p { font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; font-weight: bold; font-size: 12px; }
+.node-name { font-weight: bold;}
+
+.default {
+    padding: 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    width: 200px;
+    font-family: Comic Sans MS;
+    font-size: 12px;
+    text-align:center;
+}
+.default img {
+    margin-right:  10px;
+}
+
+.new {
+    padding: 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #7FDBFF;
+    width: 200px;
+    font-family: Comic Sans MS;
+    font-size: 12px;
+    text-align:center;
+}
+.new img {
+    margin-right:  10px;
+}
