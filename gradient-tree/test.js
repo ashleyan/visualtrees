@@ -99,7 +99,11 @@ function displayTree(x) {
 function highlightPath(x, path) {
 
     var newTree = JSON.parse(JSON.stringify(x));
-    newTree.nodeStructure = setGradients( newTree.nodeStructure, path, 0.5 );
+    newTree.nodeStructure = setGradients( newTree.nodeStructure, [0], 0.3 );
+    newTree.nodeStructure = setGradients( newTree.nodeStructure, [1,0], 0.1 );
+    newTree.nodeStructure = setGradients( newTree.nodeStructure, [2,0], 0.2 );
+    newTree.nodeStructure = setGradients( newTree.nodeStructure, [2,1,0], 0.4 );
+    changeGradients(newTree.nodeStructure);
 
     return newTree;
 }
@@ -164,10 +168,10 @@ function createTree(x, name) {
 // directly modifies weight value of tree
 function setGradients(tree, arr, w) {
     if(arr.length == 0) {
-        tree.weight = w;
+        tree.weight += w;
     }
     else{
-        tree.weight = w;
+        tree.weight += w;
         setGradients(tree.children[arr[0]], arr.slice(1), w);
     }
 
@@ -177,5 +181,11 @@ function setGradients(tree, arr, w) {
 // another function that uses getbyId to set the color for each node
 // directly changes color of tree
 function changeGradients(tree) {
+
+    for(var i = 0; i < tree.children.length; i++) {
+        changeGradients(tree.children[i]);
+    }
+    document.getElementsByClassName(tree.HTMLclass)[0].style.backgroundColor = `rgba(255, 0, 0, ${tree.weight})`;
+    //document.getElementsByClassName(tree.HTMLclass)[0].style.color = "white";
 
 }
