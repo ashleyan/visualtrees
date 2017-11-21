@@ -59,22 +59,6 @@ function parse(x) {
 
 }
 
-// Takes in array of integers specifying the path, then changes the color of those nodes
-// Input is node structure
-function changePathColor(x, arr) {
-
-    if(arr.length == 0) {
-        x.HTMLclass = 'new';
-    }
-    else{
-        x.HTMLclass = 'new';
-        changePathColor(x.children[arr[0]], arr.slice(1));
-    }
-
-    return x;
-
-}
-
 // Display tree
 function displayTree(x) {
 
@@ -96,28 +80,14 @@ function displayTree(x) {
 
 // Highlight path in tree
 // Input should be chart config
-function highlightPath(x, path) {
+function highlightPath(x, path, w) {
 
     var newTree = JSON.parse(JSON.stringify(x));
-    newTree.nodeStructure = setGradients( newTree.nodeStructure, [0], 0.3 );
-    newTree.nodeStructure = setGradients( newTree.nodeStructure, [1,0], 0.1 );
-    newTree.nodeStructure = setGradients( newTree.nodeStructure, [2,0], 0.2 );
-    newTree.nodeStructure = setGradients( newTree.nodeStructure, [2,1,0], 0.4 );
+    newTree.nodeStructure = setGradients( newTree.nodeStructure, path, w );
     changeGradients(newTree.nodeStructure);
 
     return newTree;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 // x = string to create tree
 // name = id_name for node
@@ -186,6 +156,5 @@ function changeGradients(tree) {
         changeGradients(tree.children[i]);
     }
     document.getElementsByClassName(tree.HTMLclass)[0].style.backgroundColor = `rgba(255, 0, 0, ${tree.weight})`;
-    //document.getElementsByClassName(tree.HTMLclass)[0].style.color = "white";
 
 }

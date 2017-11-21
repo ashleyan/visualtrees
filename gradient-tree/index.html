@@ -31,13 +31,6 @@
             console.log('Received a sampling message from the server!', data);
             displaySamples(data);
         }); 
-        // Receive created tree from server, then highlight path
-        /*socket.on('path',function(data) {
-            console.log('Received a message from the server!', data);
-            displayError("");
-            new Treant( highlightPath(data) );
-            // test: series [(state "safsgfd"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]
-        });*/
         // Disconnected
         socket.on('disconnect',function() {
             console.log('The client has disconnected!');
@@ -49,7 +42,7 @@
 	<h3>Enter Text: </h3>
         <div class="TextBox">
             <div>
-                <TEXTAREA Name="text" id="code" ROWS=5 COLS=90>series [(state "safsgfd"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]</TEXTAREA>
+                <TEXTAREA Name="text" id="code" ROWS=5 COLS=90>series [(state "A"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]</TEXTAREA>
                 <button onclick="sendCode()">Enter</button>
             </div>
         </div>
@@ -69,10 +62,25 @@
             </div>
         </div>
 
-    <h3>Highlight Paths: </h3>
+    <h3>Paths: </h3>
         <div class="TextBox">
             <div>
-                <TEXTAREA Name="text" id="path" ROWS=5 COLS=90></TEXTAREA>
+                <TEXTAREA Name="text" id="path" ROWS=5 COLS=90>
+1,0
+0
+2,1,0 
+2,0</TEXTAREA>
+            </div>
+        </div>
+
+    <h3>Gradients: </h3>
+        <div class="TextBox">
+            <div>
+                <TEXTAREA Name="text" id="gradients" ROWS=5 COLS=90>
+0.3,0.2,0.3,0.2
+0.5,0.0,0.5,0.0
+0.0,0.0,0.0,0.0
+0.1,0.5,0.2,0.2</TEXTAREA>
                 <button onclick="highlight()">Enter</button>
             </div>
         </div>
@@ -85,20 +93,26 @@
 
 	<script>
 
+        // "+" button: starts at first line (line 0) until end of lines
         function incrementValue()
         {
-            var value = parseInt(document.getElementById('number').value, 10);
+            var lines = document.getElementById("gradients").value.split("\n");
+            var length = lines.length;
+
+            var value = parseInt(document.getElementById('number').value, length);
             value = isNaN(value) ? 0 : value;
-            if(value<10){
+            if(value < length - 1){
                 value++;
                     document.getElementById('number').value = value;
             }
         }
+
+        // "-" button: decrements until first line (line 0)
         function decrementValue()
         {
-            var value = parseInt(document.getElementById('number').value, 10);
+            var value = parseInt(document.getElementById('number').value, length);
             value = isNaN(value) ? 0 : value;
-            if(value>0){
+            if(value > 0){
                 value--;
                     document.getElementById('number').value = value;
             }
@@ -129,14 +143,35 @@
 
         // Highlight path in tree
         function highlight() {
-            // test: 2 1 0
-            var value = parseInt(document.getElementById('number').value, 10);
-            var lines = document.getElementById("path").value.split("\n");
+            
+            // get gradients and assign each line to a number starting from 0
+            var value = parseInt(document.getElementById("number").value, 10);
+            var lines = document.getElementById("gradients").value.split("\n");
             var x = lines[value].split(",");
+
+            // turn array of strings into array of ints
             for(var i = 0; i < x.length; i++) { 
-                x[i] = parseInt(x[i], 10); 
-            } 
-            var new_tree = highlightPath( tree_display, x );
+                x[i] = parseFloat(x[i], 10); 
+            }
+
+            // create array of paths
+            var paths = document.getElementById("path").value.split("\n");
+
+            // convert arrays of strings into arrays of ints
+            for(var i = 0; i < x.length; i++) {
+                var y = paths[i].split(",");
+                for(var j = 0; j < y.length; j++) { 
+                    y[j] = parseInt(y[j]); 
+                } 
+                paths[i] = y;
+            }
+
+            // initialize new tree with first path highlighted
+            var new_tree = highlightPath( tree_display, paths[0], x[0] );
+            // create new trees with the remaining paths highlighted
+            for(var i = 1; i < x.length; i++) { 
+                var new_tree = highlightPath( new_tree, paths[i], x[i] );
+            }
         }
 
 	</script>

@@ -14,33 +14,3 @@ body { background: #fff; }
 .Treant > .node {  }
 .Treant > p { font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; font-weight: bold; font-size: 12px; }
 .node-name { font-weight: bold;}
-
-.default {
-    padding: 2px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    background-color: #ffffff;
-    width: 200px;
-    font-family: Comic Sans MS;
-    font-size: 12px;
-    text-align:center;
-}
-.default img {
-    margin-right:  10px;
-}
-
-.new {
-    padding: 2px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    background-color: #7FDBFF;
-    width: 200px;
-    font-family: Comic Sans MS;
-    font-size: 12px;
-    text-align:center;
-}
-.new img {
-    margin-right:  10px;
-}
