@@ -166,11 +166,16 @@
                 paths[i] = y;
             }
 
-            // initialize new tree with first path highlighted
-            var new_tree = highlightPath( tree_display, paths[0], x[0] );
+            // create copy of original tree
+            var new_tree = JSON.parse( JSON.stringify( tree_display ) );
+
+            // **** 2,[0;1,0] ****
+            // 0,[1,[2;0];0,[1;0]] ---> [0, [ [ 1 , [[2], [0]] ], [ 0 , [[1], [0]] ] ] ]
+            paths[0] = [2 , [ [0] , [1,0] ] ];
+
             // create new trees with the remaining paths highlighted
-            for(var i = 1; i < x.length; i++) { 
-                var new_tree = highlightPath( new_tree, paths[i], x[i] );
+            for(var i = 0; i < x.length; i++) { 
+                new_tree = highlightPath( new_tree, paths[i], x[i] );
             }
         }
 

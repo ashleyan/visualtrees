@@ -142,7 +142,15 @@ function setGradients(tree, arr, w) {
     }
     else{
         tree.weight += w;
-        setGradients(tree.children[arr[0]], arr.slice(1), w);
+        if( Array.isArray(arr[0]) ) {
+            for(var i = 0; i < arr[0].length; i++) {
+                tree.weight -= w;
+                setGradients(tree, arr[0][i], w);
+            }
+        }
+        else{
+            setGradients(tree.children[arr[0]], arr.slice(1), w);
+        }
     }
 
     return tree;
