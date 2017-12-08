@@ -159,23 +159,21 @@
 
             // convert arrays of strings into arrays of ints
             for(var i = 0; i < x.length; i++) {
-                var y = paths[i].split(",");
-                for(var j = 0; j < y.length; j++) { 
-                    y[j] = parseInt(y[j]); 
-                } 
-                paths[i] = y;
+                paths[i] = parse2(paths[i]);
             }
+
+            console.log(paths);
 
             // create copy of original tree
             var new_tree = JSON.parse( JSON.stringify( tree_display ) );
 
             // **** 2,[0;1,0] ****
             // 0,[1,[2;0];0,[1;0]] ---> [0, [ [ 1 , [[2], [0]] ], [ 0 , [[1], [0]] ] ] ]
-            paths[0] = [2 , [ [0] , [1,0] ] ];
+            // paths[0] = [2 , [ [0] , [1,0] ] ];
 
             // create new trees with the remaining paths highlighted
             for(var i = 0; i < x.length; i++) { 
-                new_tree = highlightPath( new_tree, paths[i], x[i] );
+                new_tree = highlightPath( new_tree, paths[i].slice(1), x[i] );
             }
         }
 

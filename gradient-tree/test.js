@@ -138,9 +138,13 @@ function createTree(x, name) {
 // directly modifies weight value of tree
 function setGradients(tree, arr, w) {
     if(arr.length == 0) {
+        console.log(" == 0 ");
         tree.weight += w;
     }
-    else{
+    else {
+        console.log(" != 0 ");
+        console.log(arr);
+        console.log(tree.children.length)
         tree.weight += w;
         if( Array.isArray(arr[0]) ) {
             for(var i = 0; i < arr[0].length; i++) {
@@ -165,4 +169,41 @@ function changeGradients(tree) {
     }
     document.getElementsByClassName(tree.HTMLclass)[0].style.backgroundColor = `rgba(255, 0, 0, ${tree.weight})`;
 
+}
+
+// parsing a full path
+function parse2(path) {
+    path = path.replace(/\]+/g,'');
+    var y = path.split(",[");
+
+    if(y.length > 1) {
+        y[y.length-1] = y[y.length-1].split(";");
+        for(var j = 0; j < y[y.length-1].length; j++) { 
+            y[y.length-1][j] = y[y.length-1][j].split(",");
+        } 
+
+        for(var j = 0; j < y[y.length-1].length; j++) { 
+            parse3(y[y.length-1][j]);
+        }
+        var z = y[0].split(",");
+        z.push(y[y.length-1]);
+
+        for(var j = 0; j < z.length-1; j++) { 
+            z[j] = parseInt(z[j]);
+        }
+        return z;
+    }
+    else {
+        y = y[0].split(",");
+        parse3(y);
+        return y;
+    }
+}
+
+// changing to int an array of a path
+function parse3(path) {
+    for(var i = 0; i < path.length; i++) {
+        path[i] = parseInt(path[i]); 
+    }
+    return path;
 }
