@@ -8,6 +8,7 @@ q:before,q:after { content:''; }
 abbr,acronym { border:0; }
 h3, .TextBox, .container { font-family: Comic Sans MS; text-align:left; margin:auto; width:800px;}
 button { font-family: Comic Sans MS; text-align:center; margin:0; width:80px;}
+p {text-align:left; margin:auto; width:800px;}
 
 body { background: #fff; }
 .chart { margin: 5px; }

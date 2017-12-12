@@ -200,7 +200,7 @@ function parse2(path) {
     }
 }
 
-// changing to int an array of a path
+// changing an array of strings representing a path to an array of integers 
 function parse3(path) {
     for(var i = 0; i < path.length; i++) {
         path[i] = parseInt(path[i]); 

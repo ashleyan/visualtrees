@@ -39,15 +39,17 @@
 
     </script>
 
-	<h3>Enter Text: </h3>
+	<h3>Enter Code: </h3>
+    <p>Enter SMoL code below then click "Enter".</p>
         <div class="TextBox">
             <div>
-                <TEXTAREA Name="text" id="code" ROWS=5 COLS=90>series [(state "A"), (reverse (state "B")), (then (state "C") (reverse (state "D")))]</TEXTAREA>
+                <TEXTAREA Name="text" id="code" ROWS=5 COLS=90></TEXTAREA>
                 <button onclick="sendCode()">Enter</button>
             </div>
         </div>
 
     <h3>Sampling Results: </h3>
+    <p>Click "Sample" to view sampling results.</p>
         <div class="TextBox">
             <div>
                 <TEXTAREA Name="text" id="sampleResults" ROWS=5 COLS=90 readonly></TEXTAREA>
@@ -58,29 +60,23 @@
     <h3>Error Messages: </h3>
         <div class="TextBox">
             <div>
-                <TEXTAREA Name="text" id="errors" ROWS=5 COLS=90 readonly>Not connected to server</TEXTAREA>
+                <TEXTAREA Name="text" id="errors" ROWS=5 COLS=90 readonly>Not connected to server!</TEXTAREA>
             </div>
         </div>
 
-    <h3>Paths: </h3>
+    <h3>Enter Paths: </h3>
+    <p>Enter paths below. Each line should correspond to a single path. Each path should be a comma-separated list of node indices through the SMoL AST. At least one set of weights must also be entered. After entering the weight sets, click "Enter" below.</p>
         <div class="TextBox">
             <div>
-                <TEXTAREA Name="text" id="path" ROWS=5 COLS=90>
-1,0
-0
-2,1,0 
-2,0</TEXTAREA>
+                <TEXTAREA Name="text" id="path" ROWS=5 COLS=90></TEXTAREA>
             </div>
         </div>
 
-    <h3>Gradients: </h3>
+    <h3>Enter Weights</h3>
+    <p>Enter weight sets below. Each line should have a set of weights. Each set of weights is a comma-separated list, where the nth weight corresponds to the nth path. Use the "+" and "-" buttons to choose between the different sets of weights. The weight set number is determined by line number, and it starts from 0.</p>
         <div class="TextBox">
             <div>
-                <TEXTAREA Name="text" id="gradients" ROWS=5 COLS=90>
-0.3,0.2,0.3,0.2
-0.5,0.0,0.5,0.0
-0.0,0.0,0.0,0.0
-0.1,0.5,0.2,0.2</TEXTAREA>
+                <TEXTAREA Name="text" id="gradients" ROWS=5 COLS=90></TEXTAREA>
                 <button onclick="highlight()">Enter</button>
             </div>
         </div>
