@@ -81,10 +81,12 @@ function displayTree(x) {
 // Highlight path in tree
 // Input should be chart config
 function highlightPath(x, path, w) {
+    console.log(x);
 
-    var newTree = JSON.parse(JSON.stringify(x));
+    //var newTree = JSON.parse(JSON.stringify(x));
+    newTree = x;
     newTree.nodeStructure = setGradients( newTree.nodeStructure, path, w );
-    changeGradients(newTree.nodeStructure);
+    //changeGradients(newTree.nodeStructure);
 
     return newTree;
 }
@@ -137,25 +139,30 @@ function createTree(x, name) {
 // new value each node in tree has: totalWeight = total value of weight
 // directly modifies weight value of tree
 function setGradients(tree, arr, w) {
-    if(arr.length == 0) {
-        console.log(" == 0 ");
+    //console.log(arr)
+    //console.log(tree)
+    if(arr.length == 0 || (arr.length == 1 && arr[0] == 0)) {
+        //console.log(" == 0 ");
         tree.weight += w;
     }
     else {
-        console.log(" != 0 ");
-        console.log(arr);
-        console.log(tree.children.length)
+        //console.log(" != 0 ");
+        //console.log(arr);
+        //console.log(tree.children.length)
         tree.weight += w;
         if( Array.isArray(arr[0]) ) {
+            //console.log("recursing from " + tree.HTMLclass + " with ixs " + arr[0]);
             for(var i = 0; i < arr[0].length; i++) {
                 tree.weight -= w;
                 setGradients(tree, arr[0][i], w);
             }
         }
         else{
+            //console.log("recursing from " + tree.HTMLclass + " to " + tree.children[arr[0]].HTMLclass + " ix " + arr[0]);
             setGradients(tree.children[arr[0]], arr.slice(1), w);
         }
     }
+    console.log("updating " + tree.HTMLclass + " to " + tree.weight);
 
     return tree;
 }
@@ -167,7 +174,9 @@ function changeGradients(tree) {
     for(var i = 0; i < tree.children.length; i++) {
         changeGradients(tree.children[i]);
     }
+    console.log("color weight: " + tree.weight + ", class " + tree.HTMLclass);
     document.getElementsByClassName(tree.HTMLclass)[0].style.backgroundColor = `rgba(255, 0, 0, ${tree.weight})`;
+    //document.getElementsByClassName(tree.HTMLclass)[0].style.color = `rgba(255, 0, 0, ${tree.weight})`;
 
 }
 

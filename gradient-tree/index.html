@@ -87,7 +87,7 @@
 
     <div class="container">
         <input type="button" onclick="decrementValue();highlight()" value="-" />
-        <input type="text" name="quantity" value="0" maxlength="2" max="10" size="1" id="number" />
+        <input type="text" name="quantity" value="0" maxlength="5" max="10000" size="1" id="number" />
         <input type="button" onclick="incrementValue();highlight()" value="+" />
     </div>
 
@@ -172,9 +172,12 @@
             // paths[0] = [2 , [ [0] , [1,0] ] ];
 
             // create new trees with the remaining paths highlighted
+            console.log(new_tree);
             for(var i = 0; i < x.length; i++) { 
-                new_tree = highlightPath( new_tree, paths[i].slice(1), x[i] );
+                new_tree = highlightPath( new_tree, paths[i], x[i] );
             }
+            changeGradients(newTree.nodeStructure);
+
         }
 
 	</script>

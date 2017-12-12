@@ -1,0 +1,10 @@
+nts = uniform-dist-over [(state "A"),(state "C"),(state "G"),(state "T")]
+noise = geometric-repeat 0.1111111111 nts
+flankLeft = series [(state "C"), (state "G"), (state "C"), (state "T"), (state "C"), (state "C"), (state "A"), (state "G"), (state "G"), (state "G")]
+snp = finite-dist-over [0.5899, 0.4101] [(state "T"), (state "G")]
+flankRight = series [(state "T"), (state "G"), (state "A"), (state "G"), (state "C"), (state "A"), (state "A"), (state "A"), (state "T"), (state "G")]
+seq = series [ noise, flankLeft, snp, flankRight, noise ]
+
+minion = skip-dist [0.4, 0.25, 0.15, 0.1, 0.1] (collapse 5 seq)
+
+minion
