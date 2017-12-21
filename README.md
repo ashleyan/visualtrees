@@ -3,6 +3,9 @@
 Research Project at Columbia University under the Computational Biology Department. Focus is on creating trees that visually represent code.
 
 ## Project Folder Descriptions
+* gradient-tree: highlighting paths based on assigned weights
+  * now each box has directions above it specifiying what to enter
+
 * highlight-tree: specific paths in tree can be highlighted
   * user can enter a list of paths, and then choose to highlight one of those paths
   * increment/decrement buttons allow user to switch between different paths to highlight
@@ -20,8 +23,3 @@ Research Project at Columbia University under the Computational Biology Departme
   
 * user-update-tree: user inputs data, and that data gets added to tree once button is pushed
   * user inputs text, and a specific node's text will be replaced with that text
-  
-## Potential Changes
-* Highlighting paths in gradients
-* Make tree viewport dynamic
-* Labeling different nodes based on which function
