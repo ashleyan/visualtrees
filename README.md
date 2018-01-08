@@ -1,6 +1,6 @@
 # Visual Trees
 
-Research Project at Columbia University under the Computational Biology Department. Focus is on creating trees that visually represent code.
+Research Project at Columbia University under the Computational Biology Department. Focus is on creating trees that visually represent user-inputed code. The code is inputed as text, then is displayed as a visual tree. Different paths can be highlighted based on weights assigned according to probability, and samplings can be done on the current input. The webpage overall describes the different functions that users can utilize. This user-inputed code is currently specific to my research mentor's code, which is written in Haskall.
 
 ## Project Folder Descriptions
 * gradient-tree: highlighting paths based on assigned weights
